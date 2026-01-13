@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+    }
+    .header {
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 2px solid #28a745;
+    }
+    .header h1 {
+      margin: 0;
+      color: #28a745;
+    }
+    .content {
+      padding: 30px 20px;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #28a745;
+      color: white !important;
+      text-decoration: none;
+      border-radius: 4px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+    .button:hover {
+      background-color: #218838;
+    }
+    .link-text {
+      word-break: break-all;
+      color: #28a745;
+      font-size: 14px;
+    }
+    .warning {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 12px;
+      margin: 20px 0;
+    }
+    .footer {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>{{t "emailChange.heading" appName=(t "app.name")}}</h1>
+    </div>
+    <div class="content">
+      <h2>{{t "emailChange.title"}}</h2>
+      <p>{{t "emailChange.greeting"}}</p>
+      <p>{{{t "emailChange.body" appName=(t "app.name") email=email}}}</p>
+      <p>{{t "emailChange.instruction"}}</p>
+      <div style="text-align: center;">
+        <a href="{{confirmationLink}}" class="button">{{t "emailChange.button"}}</a>
+      </div>
+      <p>{{t "emailChange.linkText"}}</p>
+      <p class="link-text">{{confirmationLink}}</p>
+      <p><strong>{{t "emailChange.expiration" minutes=expirationMinutes}}</strong></p>
+      <div class="warning">
+        <strong>{{t "emailChange.important.title"}}</strong> {{t "emailChange.important.body"}}
+      </div>
+    </div>
+    <div class="footer">
+      <p>{{t "emailChange.footer.ignore"}}</p>
+      <p>{{t "emailChange.footer.noChange"}}</p>
+      <p>{{{t "emailChange.footer.copyright" appName=(t "app.name")}}}</p>
+    </div>
+  </div>
+</body>
+</html>

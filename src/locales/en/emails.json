@@ -1,0 +1,71 @@
+{
+  "app": {
+    "name": "SaaS Starter Template",
+    "tagline": "your production-ready SaaS foundation"
+  },
+  "confirmation": {
+    "subject": "Confirm Your Email Address",
+    "heading": "{{appName}}",
+    "title": "Welcome!",
+    "greeting": "Hello,",
+    "body": "Thank you for signing up for {{appName}}! To complete your registration and activate your account, please confirm your email address by clicking the button below:",
+    "button": "Confirm Email Address",
+    "linkText": "Or copy and paste this link into your browser:",
+    "expiration": "This link will expire in {{hours}} hours.",
+    "features": {
+      "title": "Once you confirm your email, you'll be able to:",
+      "item1": "Access your dashboard",
+      "item2": "Manage your account settings",
+      "item3": "Explore all available features",
+      "item4": "Customize your experience"
+    },
+    "footer": {
+      "ignore": "If you didn't create an account with {{appName}}, you can safely ignore this email.",
+      "copyright": "© 2024 {{appName}}. All rights reserved."
+    }
+  },
+  "passwordReset": {
+    "subject": "Reset Your Password",
+    "heading": "{{appName}}",
+    "title": "Password Reset Request",
+    "greeting": "Hello,",
+    "body": "We received a request to reset the password for your {{appName}} account. If you made this request, click the button below to create a new password:",
+    "button": "Reset Password",
+    "linkText": "Or copy and paste this link into your browser:",
+    "expiration": "This link will expire in {{minutes}} minutes.",
+    "securityNotice": {
+      "title": "Security Notice:",
+      "body": "For your protection, this password reset link can only be used once and will expire soon."
+    },
+    "footer": {
+      "ignore": "If you didn't request a password reset, you can safely ignore this email. Your password will not be changed.",
+      "contact": "If you're concerned about your account security, please contact our support team.",
+      "copyright": "© 2024 {{appName}}. All rights reserved."
+    }
+  },
+  "emailChange": {
+    "subject": "Confirm Your Email Address Change",
+    "heading": "{{appName}}",
+    "title": "Confirm Email Address Change",
+    "greeting": "Hello,",
+    "body": "We received a request to change the email address for your {{appName}} account to <strong>{{email}}</strong>.",
+    "instruction": "To complete this change and update your account, please click the button below:",
+    "button": "Confirm Email Change",
+    "linkText": "Or copy and paste this link into your browser:",
+    "expiration": "This link will expire in {{minutes}} minutes.",
+    "important": {
+      "title": "Important:",
+      "body": "After confirming this email change, you will need to log in again using your new email address. All existing sessions will be invalidated for security purposes."
+    },
+    "footer": {
+      "ignore": "If you didn't request this email change, please ignore this email and contact our support team immediately.",
+      "noChange": "Your account email will not be changed unless you click the confirmation link above.",
+      "copyright": "© 2024 {{appName}}. All rights reserved."
+    }
+  },
+  "common": {
+    "regards": "Best regards,",
+    "team": "The {{appName}} Team",
+    "needHelp": "Need help? Contact us at support@example.com"
+  }
+}

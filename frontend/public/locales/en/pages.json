@@ -1,0 +1,418 @@
+{
+  "welcome": {
+    "title": "Welcome - SaaS Starter Template",
+    "hero": {
+      "heading": "Build Your SaaS Application Faster",
+      "subheading": "A production-ready template with authentication, user management, admin panel, and tier system. Start building your unique features immediately.",
+      "getStarted": "Get Started Free",
+      "signIn": "Sign In"
+    },
+    "features": {
+      "authentication": {
+        "title": "Complete Authentication",
+        "description": "Email-based registration, JWT tokens, password reset, and email confirmation built-in and ready to use."
+      },
+      "userManagement": {
+        "title": "User Management",
+        "description": "Profile management, account settings, data export, and account deletion with full GDPR compliance."
+      },
+      "adminPanel": {
+        "title": "Admin Panel",
+        "description": "Manage users, roles, and system settings through a comprehensive admin interface with role-based access control."
+      }
+    },
+    "benefits": {
+      "heading": "Why Choose This Template?",
+      "productionReady": {
+        "title": "Production Ready",
+        "description": "Built with TypeScript, React, and Express. Includes Docker configuration for easy deployment."
+      },
+      "tierSystem": {
+        "title": "Tier System",
+        "description": "Built-in subscription tiers with usage tracking and limit enforcement. Perfect for SaaS pricing models."
+      },
+      "notifications": {
+        "title": "Notification System",
+        "description": "Banner and toast notifications with real-time updates via Server-Sent Events."
+      },
+      "internationalization": {
+        "title": "Internationalization",
+        "description": "Multi-language support with i18next. English and German translations included."
+      },
+      "taskScheduler": {
+        "title": "Task Scheduler",
+        "description": "Cron-based background task execution framework for periodic jobs and maintenance tasks."
+      },
+      "securePrivate": {
+        "title": "Secure & Private",
+        "description": "Industry-standard security with bcrypt password hashing, JWT authentication, and rate limiting."
+      }
+    },
+    "cta": {
+      "heading": "Ready to Start Building?",
+      "subheading": "Get started with a solid foundation for your SaaS application",
+      "button": "Create Your Free Account"
+    }
+  },
+  "login": {
+    "title": "Login - SaaS Starter Template",
+    "heading": "Sign in to your account",
+    "email": "Email address",
+    "password": "Password",
+    "submit": "Sign In",
+    "submitting": "Signing in...",
+    "forgotPassword": "Forgot your password?",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up",
+    "errors": {
+      "emailRequired": "Email address is required",
+      "passwordRequired": "Password is required",
+      "loginFailed": "Login failed. Please check your credentials."
+    }
+  },
+  "signup": {
+    "title": "Sign Up - SaaS Starter Template",
+    "heading": "Create your account",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Sign Up",
+    "submitting": "Creating Account...",
+    "passwordHint": "Must be at least 8 characters long",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInLink": "Sign in",
+    "errors": {
+      "emailRequired": "Email address is required",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "confirmPasswordRequired": "Password confirmation is required",
+      "passwordMismatch": "Passwords do not match",
+      "accountExists": "An account with this email address already exists",
+      "invalidFormat": "Invalid email or password format",
+      "registrationFailed": "Registration failed. Please try again."
+    },
+    "success": {
+      "heading": "Check Your Email",
+      "message": "We've sent a confirmation email to <strong>{{email}}</strong>. Please check your inbox and click the confirmation link to activate your account.",
+      "note": "The confirmation link will expire in 24 hours. If you don't see the email, please check your spam folder.",
+      "goToLogin": "Go to Login"
+    }
+  },
+  "confirmEmail": {
+    "title": "Confirm Email - SaaS Starter Template",
+    "appName": "SaaS Starter Template",
+    "loading": {
+      "heading": "Confirming Your Email",
+      "message": "Please wait while we verify your email address..."
+    },
+    "success": {
+      "heading": "Email Confirmed!",
+      "message": "Your email address has been successfully verified. You can now log in to your account.",
+      "redirecting": "Redirecting to login page in a few seconds...",
+      "goToLogin": "Go to Login",
+      "loginMessage": "Email confirmed successfully. You can now log in."
+    },
+    "error": {
+      "heading": "Confirmation Failed",
+      "signUpAgain": "Sign Up Again",
+      "backToLogin": "Back to Login"
+    },
+    "errors": {
+      "noToken": "No confirmation token provided. Please check your email and click the confirmation link.",
+      "invalidToken": "This confirmation link is invalid or has expired. Please request a new confirmation email.",
+      "failed": "Failed to confirm email. Please try again."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard - SaaS Starter Template",
+    "heading": "Dashboard",
+    "subheading": "Welcome to your SaaS application dashboard",
+    "welcome": "Welcome to your SaaS application dashboard.",
+    "gettingStarted": "Getting Started",
+    "gettingStartedDesc": "This is a placeholder card. Replace with your application's main features.",
+    "yourData": "Your Data",
+    "yourDataDesc": "Add components here to display user-specific data and metrics.",
+    "quickActions": "Quick Actions",
+    "quickActionsDesc": "Add buttons and forms for common user actions.",
+    "devNote": {
+      "title": "Developer Note",
+      "message": "This is a placeholder dashboard. Customize this page to build your application's main interface. The template includes authentication, user management, admin panel, and tier system ready to use.",
+      "features": "Included features:",
+      "auth": "Email-based authentication with JWT tokens",
+      "userMgmt": "User profile management and account settings",
+      "admin": "Admin panel for user and system management",
+      "tiers": "Tier-based subscription system with limits",
+      "notifications": "Banner and toast notification system",
+      "i18n": "Internationalization (English and German)",
+      "scheduler": "Background task scheduler framework"
+    }
+  },
+  "analytics": {
+    "title": "Analytics - SaaS Starter Template",
+    "subtitle": "Track your application performance and user metrics.",
+    "stats": {
+      "totalUsers": "Total Users",
+      "totalUsersChange": "12.5% from last month",
+      "revenue": "Monthly Revenue",
+      "revenueChange": "8.3% from last month",
+      "activeUsers": "Active Users",
+      "activeUsersChange": "5.2% from last week",
+      "conversion": "Conversion Rate",
+      "conversionChange": "0.5% from last month"
+    },
+    "charts": {
+      "revenue": "Revenue & Expenses",
+      "userGrowth": "User Growth",
+      "tierDistribution": "Tier Distribution",
+      "weeklyActivity": "Weekly Activity"
+    },
+    "devNote": {
+      "title": "Developer Note",
+      "message": "This analytics page displays sample data using Recharts. Replace the dummy data with real metrics from your API to track actual application performance."
+    }
+  },
+  "profile": {
+    "title": "Profile - SaaS Starter Template",
+    "heading": "Profile",
+    "subheading": "Manage your account settings and data",
+    "tabs": {
+      "account": "Account"
+    },
+    "accountInfo": {
+      "heading": "Account Information",
+      "email": "Email Address",
+      "accountCreated": "Account Created",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastNamePlaceholder": "Enter your last name"
+    },
+    "accountActions": {
+      "heading": "Account Actions",
+      "changePassword": {
+        "title": "Change Password",
+        "description": "Update your account password",
+        "button": "Change Password"
+      },
+      "changeEmail": {
+        "title": "Change Email Address",
+        "description": "Update your email address",
+        "button": "Change Email",
+        "cancel": "Cancel",
+        "newEmail": "New Email Address",
+        "newEmailPlaceholder": "Enter new email address",
+        "currentPassword": "Current Password",
+        "currentPasswordPlaceholder": "Enter your current password",
+        "submit": "Request Email Change",
+        "submitting": "Requesting...",
+        "note": "A confirmation link will be sent to your new email address.",
+        "errors": {
+          "invalidEmail": "Please enter a valid email address",
+          "passwordRequired": "Password is required"
+        }
+      },
+      "downloadData": {
+        "title": "Download Your Data",
+        "description": "Export all your data as a JSON file",
+        "button": "Download Data",
+        "downloading": "Exporting..."
+      },
+      "deleteAccount": {
+        "title": "Delete Account",
+        "description": "Permanently delete your account and all data",
+        "button": "Delete Account",
+        "confirm": {
+          "heading": "Delete Account",
+          "message": "Are you sure you want to delete your account? This action is permanent and cannot be undone.",
+          "warning": "The following data will be permanently deleted:",
+          "items": {
+            "account": "Your account information",
+            "data": "All your application data"
+          },
+          "confirmButton": "Yes, Delete My Account",
+          "confirmingButton": "Deleting...",
+          "cancel": "Cancel"
+        }
+      }
+    },
+    "loadingProfile": "Loading profile...",
+    "errors": {
+      "firstNameTooLong": "First name must be 50 characters or less",
+      "lastNameTooLong": "Last name must be 50 characters or less",
+      "updateFailed": "Failed to update profile. Please try again."
+    },
+    "success": {
+      "profileUpdated": "Profile updated successfully"
+    }
+  },
+  "admin": {
+    "title": "Admin - SaaS Starter Template",
+    "heading": "User Management",
+    "subheading": "Manage user accounts and permissions",
+    "search": {
+      "label": "Search by email address",
+      "placeholder": "Enter email address..."
+    },
+    "roleFilter": {
+      "label": "Filter by role",
+      "allRoles": "All Roles"
+    },
+    "table": {
+      "email": "Email Address",
+      "role": "Role",
+      "status": "Status",
+      "created": "Created",
+      "actions": "Actions",
+      "edit": "Edit",
+      "activate": "Activate",
+      "activating": "Processing...",
+      "deactivate": "Deactivate",
+      "deactivating": "Processing...",
+      "self": "(Self)",
+      "cannotDeactivateSelf": "Cannot deactivate your own account"
+    },
+    "loading": "Loading users...",
+    "error": "Error loading users",
+    "noUsers": "No users found",
+    "noResults": "No users match your search criteria",
+    "resultsSummary": "Showing {{filtered}} of {{total}} users",
+    "deactivateConfirm": {
+      "heading": "Deactivate User Account?",
+      "message": "Are you sure you want to deactivate this user? They will not be able to log in until their account is reactivated.",
+      "cancel": "Cancel",
+      "confirm": "Deactivate",
+      "confirming": "Deactivating..."
+    },
+    "toast": {
+      "roleUpdated": "Role updated successfully",
+      "emailUpdated": "Email updated successfully",
+      "passwordResetSent": "Password reset email sent successfully",
+      "passwordUpdated": "Password updated successfully",
+      "userActivated": "User activated successfully",
+      "userDeactivated": "User deactivated successfully",
+      "roleUpdateFailed": "Failed to update role",
+      "emailUpdateFailed": "Failed to update email",
+      "passwordResetFailed": "Failed to reset password",
+      "passwordSetFailed": "Failed to set password",
+      "activateFailed": "Failed to activate user",
+      "deactivateFailed": "Failed to deactivate user"
+    }
+  },
+  "pricing": {
+    "title": "Pricing - SaaS Starter Template",
+    "heading": "Simple, Transparent Pricing",
+    "subheading": "Choose the plan that fits your needs",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "price": "$0",
+        "period": "/month",
+        "description": "Perfect for getting started",
+        "features": {
+          "users": "Up to 5 team members",
+          "storage": "10 GB storage",
+          "basicFeatures": "All basic features",
+          "emailSupport": "Email support",
+          "communityAccess": "Community access",
+          "advancedAnalytics": "Advanced analytics",
+          "prioritySupport": "Priority support"
+        },
+        "button": "Get Started"
+      },
+      "professional": {
+        "name": "Professional",
+        "price": "$29",
+        "period": "/month",
+        "description": "For growing businesses",
+        "badge": "Most Popular",
+        "features": {
+          "users": "Up to 25 team members",
+          "storage": "100 GB storage",
+          "allBasicFeatures": "All basic features",
+          "advancedAnalytics": "Advanced analytics & reports",
+          "apiAccess": "API access",
+          "customBranding": "Custom branding",
+          "prioritySupport": "Priority email support"
+        },
+        "button": "Start Free Trial"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "$99",
+        "period": "/month",
+        "description": "For large organizations",
+        "features": {
+          "unlimitedUsers": "Unlimited team members",
+          "unlimitedStorage": "Unlimited storage",
+          "allProfessionalFeatures": "All professional features",
+          "advancedSecurity": "Advanced security & compliance",
+          "customIntegrations": "Custom integrations",
+          "dedicatedSupport": "Dedicated account manager",
+          "sla": "99.9% uptime SLA"
+        },
+        "button": "Contact Sales"
+      }
+    },
+    "comparison": {
+      "heading": "Feature Comparison",
+      "feature": "Feature",
+      "rows": {
+        "users": "Team Members",
+        "storage": "Storage",
+        "basicFeatures": "Basic Features",
+        "advancedAnalytics": "Advanced Analytics",
+        "apiAccess": "API Access",
+        "customIntegrations": "Custom Integrations",
+        "support": "Support"
+      },
+      "values": {
+        "starter": {
+          "users": "Up to 5",
+          "storage": "10 GB",
+          "support": "Community"
+        },
+        "professional": {
+          "users": "Up to 25",
+          "storage": "100 GB",
+          "support": "Priority Email"
+        },
+        "enterprise": {
+          "users": "Unlimited",
+          "storage": "Unlimited",
+          "support": "Dedicated + SLA"
+        }
+      }
+    }
+  },
+  "legal": {
+    "title": "Legal Information - SaaS Starter Template",
+    "heading": "Legal Information",
+    "companyInfo": {
+      "heading": "Company Information",
+      "serviceName": "Service Name:",
+      "serviceNameValue": "SaaS Starter Template",
+      "serviceType": "Service Type:",
+      "serviceTypeValue": "SaaS Application Template",
+      "contact": "Contact:",
+      "contactValue": "legal@example.com"
+    },
+    "contact": {
+      "heading": "Contact Us",
+      "content": "If you have questions about these legal terms, please contact us at:",
+      "email": "Email:",
+      "emailValue": "legal@example.com"
+    },
+    "lastUpdated": "Last Updated: January 11, 2026"
+  },
+  "terms": {
+    "title": "Terms of Service - SaaS Starter Template",
+    "heading": "Terms of Service",
+    "lastUpdated": "Last Updated: January 11, 2026"
+  },
+  "privacy": {
+    "title": "Privacy Policy - SaaS Starter Template",
+    "heading": "Privacy Policy",
+    "lastUpdated": "Last Updated: January 11, 2026"
+  }
+}

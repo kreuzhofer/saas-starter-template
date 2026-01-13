@@ -1,0 +1,58 @@
+{
+  "auth": {
+    "invalidCredentials": "Ungültige E-Mail oder Passwort",
+    "emailNotConfirmed": "Bitte bestätigen Sie Ihre E-Mail-Adresse",
+    "emailConfirmationRequired": "E-Mail-Bestätigung erforderlich",
+    "tokenExpired": "Token ist abgelaufen",
+    "tokenInvalid": "Ungültiger Token",
+    "invalidOrExpiredToken": "Ungültiger oder abgelaufener Token",
+    "invalidOrExpiredResetToken": "Ungültiger oder abgelaufener Zurücksetzungs-Token",
+    "invalidOrExpiredConfirmationToken": "Ungültiger oder abgelaufener Bestätigungs-Token",
+    "unauthorized": "Unbefugter Zugriff",
+    "authenticationRequired": "Authentifizierung erforderlich",
+    "currentPasswordIncorrect": "Aktuelles Passwort ist falsch",
+    "accountNotFound": "Konto nicht gefunden",
+    "apiKeyRequired": "API-Schlüssel erforderlich",
+    "invalidApiKey": "Ungültiger API-Schlüssel",
+    "passwordResetRequested": "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Link zum Zurücksetzen des Passworts gesendet. Bitte überprüfen Sie Ihre E-Mails.",
+    "passwordResetSuccess": "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
+    "passwordChangedSuccess": "Ihr Passwort wurde erfolgreich geändert.",
+    "emailConfirmedSuccess": "Ihre E-Mail wurde erfolgreich bestätigt. Sie können sich jetzt anmelden."
+  },
+  "validation": {
+    "required": "{{field}} ist erforderlich",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "invalidEmailFormat": "Ungültiges E-Mail-Adressformat",
+    "emailAlreadyInUse": "E-Mail-Adresse wird bereits verwendet",
+    "passwordTooShort": "Passwort muss mindestens {{min}} Zeichen lang sein",
+    "passwordMismatch": "Passwort und Bestätigung stimmen nicht überein",
+    "validationFailed": "Validierung fehlgeschlagen"
+  },
+  "user": {
+    "notFound": "Benutzer nicht gefunden",
+    "usernameAlreadyExists": "Benutzername existiert bereits",
+    "usernameRequired": "Benutzername ist erforderlich",
+    "passwordRequired": "Passwort ist erforderlich",
+    "cannotDeactivateOwnAccount": "Sie können Ihr eigenes Konto nicht deaktivieren",
+    "cannotChangeOwnAdminRole": "Sie können Ihre eigene Admin-Rolle nicht in eine Nicht-Admin-Rolle ändern"
+  },
+  "role": {
+    "invalid": "Ungültige Rolle: {{role}}. Muss eine der folgenden sein: admin, account_owner, account_user",
+    "invalidInToken": "Ungültige Rolle im Token",
+    "mustBeOneOf": "Rolle muss eine der folgenden sein: admin, account_owner, account_user"
+  },
+  "general": {
+    "internalServerError": "Interner Serverfehler",
+    "unknownError": "Unbekannter Fehler"
+  },
+  "pluralization": {
+    "errors": "{{count}} Fehler",
+    "errors_other": "{{count}} Fehler",
+    "warnings": "{{count}} Warnung",
+    "warnings_other": "{{count}} Warnungen",
+    "records": "{{count}} Datensatz",
+    "records_other": "{{count}} Datensätze",
+    "users": "{{count}} Benutzer",
+    "users_other": "{{count}} Benutzer"
+  }
+}

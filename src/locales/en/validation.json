@@ -1,0 +1,26 @@
+{
+  "fields": {
+    "username": "Username",
+    "password": "Password",
+    "email": "Email",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "passwordConfirmation": "Password confirmation",
+    "token": "Token",
+    "role": "Role"
+  },
+  "messages": {
+    "required": "{{field}} is required",
+    "minLength": "{{field}} must be at least {{min}} characters",
+    "maxLength": "{{field}} must not exceed {{max}} characters",
+    "invalidFormat": "{{field}} has an invalid format",
+    "mustBeUrl": "{{field}} must be a valid HTTP or HTTPS URL",
+    "mustBeEmail": "{{field}} must be a valid email address",
+    "mustMatch": "{{field}} must match {{otherField}}",
+    "mustBePositive": "{{field}} must be a positive number",
+    "mustBeFinite": "{{field}} must be a finite number",
+    "invalidCharacters": "{{field}} contains invalid characters",
+    "alreadyExists": "{{field}} already exists",
+    "notFound": "{{field}} not found"
+  }
+}

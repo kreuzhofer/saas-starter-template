@@ -1,0 +1,71 @@
+{
+  "app": {
+    "name": "SaaS Starter Template",
+    "tagline": "Ihr produktionsreife SaaS-Grundlage"
+  },
+  "confirmation": {
+    "subject": "Bestätigen Sie Ihre E-Mail-Adresse",
+    "heading": "{{appName}}",
+    "title": "Willkommen!",
+    "greeting": "Hallo,",
+    "body": "Vielen Dank für Ihre Anmeldung bei {{appName}}! Um Ihre Registrierung abzuschließen und Ihr Konto zu aktivieren, bestätigen Sie bitte Ihre E-Mail-Adresse, indem Sie auf die Schaltfläche unten klicken:",
+    "button": "E-Mail-Adresse bestätigen",
+    "linkText": "Oder kopieren Sie diesen Link und fügen Sie ihn in Ihren Browser ein:",
+    "expiration": "Dieser Link läuft in {{hours}} Stunden ab.",
+    "features": {
+      "title": "Sobald Sie Ihre E-Mail bestätigt haben, können Sie:",
+      "item1": "Auf Ihr Dashboard zugreifen",
+      "item2": "Ihre Kontoeinstellungen verwalten",
+      "item3": "Alle verfügbaren Funktionen erkunden",
+      "item4": "Ihre Erfahrung anpassen"
+    },
+    "footer": {
+      "ignore": "Wenn Sie kein Konto bei {{appName}} erstellt haben, können Sie diese E-Mail ignorieren.",
+      "copyright": "© 2024 {{appName}}. Alle Rechte vorbehalten."
+    }
+  },
+  "passwordReset": {
+    "subject": "Setzen Sie Ihr Passwort zurück",
+    "heading": "{{appName}}",
+    "title": "Anfrage zum Zurücksetzen des Passworts",
+    "greeting": "Hallo,",
+    "body": "Wir haben eine Anfrage zum Zurücksetzen des Passworts für Ihr {{appName}}-Konto erhalten. Wenn Sie diese Anfrage gestellt haben, klicken Sie auf die Schaltfläche unten, um ein neues Passwort zu erstellen:",
+    "button": "Passwort zurücksetzen",
+    "linkText": "Oder kopieren Sie diesen Link und fügen Sie ihn in Ihren Browser ein:",
+    "expiration": "Dieser Link läuft in {{minutes}} Minuten ab.",
+    "securityNotice": {
+      "title": "Sicherheitshinweis:",
+      "body": "Zu Ihrem Schutz kann dieser Link zum Zurücksetzen des Passworts nur einmal verwendet werden und läuft bald ab."
+    },
+    "footer": {
+      "ignore": "Wenn Sie kein Zurücksetzen des Passworts angefordert haben, können Sie diese E-Mail ignorieren. Ihr Passwort wird nicht geändert.",
+      "contact": "Wenn Sie Bedenken bezüglich der Sicherheit Ihres Kontos haben, wenden Sie sich bitte an unser Support-Team.",
+      "copyright": "© 2024 {{appName}}. Alle Rechte vorbehalten."
+    }
+  },
+  "emailChange": {
+    "subject": "Bestätigen Sie die Änderung Ihrer E-Mail-Adresse",
+    "heading": "{{appName}}",
+    "title": "E-Mail-Adressänderung bestätigen",
+    "greeting": "Hallo,",
+    "body": "Wir haben eine Anfrage erhalten, die E-Mail-Adresse für Ihr {{appName}}-Konto in <strong>{{email}}</strong> zu ändern.",
+    "instruction": "Um diese Änderung abzuschließen und Ihr Konto zu aktualisieren, klicken Sie bitte auf die Schaltfläche unten:",
+    "button": "E-Mail-Änderung bestätigen",
+    "linkText": "Oder kopieren Sie diesen Link und fügen Sie ihn in Ihren Browser ein:",
+    "expiration": "Dieser Link läuft in {{minutes}} Minuten ab.",
+    "important": {
+      "title": "Wichtig:",
+      "body": "Nach der Bestätigung dieser E-Mail-Änderung müssen Sie sich erneut mit Ihrer neuen E-Mail-Adresse anmelden. Alle bestehenden Sitzungen werden aus Sicherheitsgründen ungültig."
+    },
+    "footer": {
+      "ignore": "Wenn Sie diese E-Mail-Änderung nicht angefordert haben, ignorieren Sie diese E-Mail bitte und wenden Sie sich sofort an unser Support-Team.",
+      "noChange": "Ihre Konto-E-Mail wird nicht geändert, es sei denn, Sie klicken auf den Bestätigungslink oben.",
+      "copyright": "© 2024 {{appName}}. Alle Rechte vorbehalten."
+    }
+  },
+  "common": {
+    "regards": "Mit freundlichen Grüßen,",
+    "team": "Das {{appName}}-Team",
+    "needHelp": "Benötigen Sie Hilfe? Kontaktieren Sie uns unter support@example.com"
+  }
+}

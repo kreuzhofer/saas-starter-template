@@ -1,0 +1,86 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: saas-starter-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-saas_starter}
+      POSTGRES_USER: ${POSTGRES_USER:-saas_starter}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-saas_starter}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - saas-starter-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    pull_policy: build
+    container_name: saas-starter-app
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-saas_starter}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-saas_starter}
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      BASE_URL: ${BASE_URL:-http://localhost:8081}
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:3001}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      API_KEY: ${API_KEY:-}
+      JWT_SECRET: ${JWT_SECRET:-}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-24h}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-noreply@example.com}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-60000}
+      RATE_LIMIT_MAX_REQUESTS: ${RATE_LIMIT_MAX_REQUESTS:-60}
+      AUTO_SEED: ${AUTO_SEED:-true}
+    ports:
+      - "${API_PORT:-3001}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - saas-starter-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${API_BASE_URL:-http://localhost:3001}
+        VITE_API_KEY: ${API_KEY:-}
+    pull_policy: build
+    container_name: saas-starter-frontend
+    environment:
+      API_BASE_URL: ${API_BASE_URL:-http://localhost:3001}
+      API_KEY: ${API_KEY:-}
+    ports:
+      - "${FRONTEND_PORT:-8081}:80"
+    depends_on:
+      - app
+    restart: unless-stopped
+    networks:
+      - saas-starter-network
+
+volumes:
+  postgres_data:
+
+networks:
+  saas-starter-network:
+    driver: bridge

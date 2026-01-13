@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountTier {
+  starter
+  pro
+  business
+  enterprise
+}
+
+enum AccountRole {
+  admin
+  account_owner
+  account_user
+}
+
+model Account {
+  id                      String                   @id @default(uuid()) @db.Uuid
+  username                String                   @unique @db.VarChar(255)
+  passwordHash            String                   @db.VarChar(255)
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @updatedAt
+  isActive                Boolean                  @default(false)
+  role                    AccountRole              @default(account_owner)
+  language                String                   @default("en") @db.VarChar(10)
+  firstName               String?                  @db.VarChar(50)
+  lastName                String?                  @db.VarChar(50)
+  tier                    AccountTier              @default(starter)
+  banners                 Banner[]
+  bannerDismissals        BannerDismissal[]
+  emailChangeTokens       EmailChangeToken[]
+  emailConfirmationTokens EmailConfirmationToken[]
+  limitOverrides          LimitOverride[]
+  passwordResetTokens     PasswordResetToken[]
+  usageRecords            UsageRecord[]
+
+  @@index([username])
+  @@index([role])
+  @@index([tier])
+  @@map("accounts")
+}
+
+model EmailConfirmationToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  accountId String   @db.Uuid
+  token     String   @unique @db.VarChar(255)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([accountId])
+  @@map("email_confirmation_tokens")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  accountId String    @db.Uuid
+  token     String    @unique @db.VarChar(255)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  account   Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([accountId])
+  @@map("password_reset_tokens")
+}
+
+model EmailChangeToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  accountId String   @db.Uuid
+  newEmail  String   @db.VarChar(255)
+  token     String   @unique @db.VarChar(255)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([accountId])
+  @@map("email_change_tokens")
+}
+
+model ScheduledTaskStatus {
+  id           String    @id @default(uuid()) @db.Uuid
+  taskName     String    @unique @db.VarChar(100)
+  enabled      Boolean   @default(true)
+  lastRun      DateTime?
+  nextRun      DateTime?
+  lastResult   String?   @db.VarChar(20)
+  lastError    String?
+  lastDuration Int?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([taskName])
+  @@index([enabled])
+  @@index([lastRun])
+  @@map("scheduled_task_status")
+}
+
+model UsageRecord {
+  id          String   @id @default(uuid()) @db.Uuid
+  accountId   String   @db.Uuid
+  limitName   String   @db.VarChar(100)
+  value       Int      @default(0)
+  periodStart DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@unique([accountId, limitName, periodStart])
+  @@index([accountId])
+  @@index([periodStart])
+  @@map("usage_records")
+}
+
+model LimitOverride {
+  id            String    @id @default(uuid()) @db.Uuid
+  accountId     String    @db.Uuid
+  limitName     String    @db.VarChar(100)
+  overrideValue Int
+  expiresAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  account       Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@unique([accountId, limitName])
+  @@index([accountId])
+  @@index([expiresAt])
+  @@map("limit_overrides")
+}
+
+model Banner {
+  id              String            @id @default(uuid()) @db.Uuid
+  key             String?           @db.VarChar(255)
+  accountId       String?           @db.Uuid
+  type            String            @db.VarChar(20)
+  message         String            @db.Text
+  dismissable     Boolean           @default(true)
+  audience        String            @default("authenticated") @db.VarChar(20)
+  linkText        String?           @db.VarChar(255)
+  linkUrl         String?           @db.Text
+  linkExternal    Boolean           @default(false)
+  linkStyle       String?           @db.VarChar(20)
+  backgroundColor String?           @db.VarChar(50)
+  textColor       String?           @db.VarChar(50)
+  scheduledStart  DateTime?
+  scheduledEnd    DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  account         Account?          @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  dismissals      BannerDismissal[]
+
+  @@index([key])
+  @@index([accountId])
+  @@index([type])
+  @@index([scheduledStart])
+  @@index([scheduledEnd])
+  @@index([audience])
+  @@map("banners")
+}
+
+model BannerDismissal {
+  id          String   @id @default(uuid()) @db.Uuid
+  bannerId    String   @db.Uuid
+  accountId   String   @db.Uuid
+  dismissedAt DateTime @default(now())
+  banner      Banner   @relation(fields: [bannerId], references: [id], onDelete: Cascade)
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@unique([bannerId, accountId])
+  @@index([bannerId])
+  @@index([accountId])
+  @@map("banner_dismissals")
+}

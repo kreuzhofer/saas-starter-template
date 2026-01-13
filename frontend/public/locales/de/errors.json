@@ -1,0 +1,19 @@
+{
+  "auth": {
+    "invalidCredentials": "Ungültige E-Mail oder Passwort",
+    "emailNotConfirmed": "Bitte bestätigen Sie Ihre E-Mail-Adresse",
+    "tokenExpired": "Token ist abgelaufen",
+    "tokenInvalid": "Ungültiger Token",
+    "unauthorized": "Unbefugter Zugriff",
+    "authenticationRequired": "Authentifizierung erforderlich"
+  },
+  "validation": {
+    "required": "{{field}} ist erforderlich",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "passwordTooShort": "Passwort muss mindestens {{min}} Zeichen lang sein"
+  },
+  "api": {
+    "requestFailed": "Anfrage fehlgeschlagen",
+    "networkError": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung."
+  }
+}

@@ -1,0 +1,13 @@
+node_modules
+dist
+.env
+.git
+.gitignore
+README.md
+SETUP_CHECKLIST.md
+docs/
+scripts/
+logs
+coverage
+.vscode
+.idea

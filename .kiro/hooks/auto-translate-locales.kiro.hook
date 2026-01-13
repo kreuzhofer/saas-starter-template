@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Auto-Translate Localization Files",
+  "description": "Monitors changes to primary language localization files (JSON/YAML) and automatically generates translations for all configured target languages while maintaining context and locale-specific conventions",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/locales/en/*.json",
+      "frontend/public/locales/en/*.json"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A localization file in the primary language (English) has been modified. Please:\n\n1. Identify all new or modified translation keys and their values in the changed file\n2. Analyze the context and meaning of each text entry\n3. Generate accurate translations for all configured target languages (currently: German/de)\n4. Ensure translations:\n   - Maintain the original meaning and context\n   - Follow locale-specific conventions (date formats, number formats, cultural nuances)\n   - Preserve any interpolation variables (e.g., {{variable}})\n   - Match the tone and formality of the original text\n5. Update the corresponding translation files in other language directories (e.g., src/locales/de/, frontend/public/locales/de/)\n6. Maintain the same JSON structure and key hierarchy across all language files\n\nPlease provide the updated translation files with the new translations added."
+  }
+}

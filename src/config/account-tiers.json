@@ -1,0 +1,68 @@
+{
+  "tiers": {
+    "starter": {
+      "displayName": "Starter",
+      "features": {
+        "custom_short_codes": false,
+        "custom_domains": false,
+        "api_access": false,
+        "advanced_analytics": false,
+        "priority_support": false
+      },
+      "limits": {
+        "short_urls_total": 10,
+        "link_clicks_per_month": 1000,
+        "api_calls_per_day": 0,
+        "custom_domains_total": 0
+      }
+    },
+    "pro": {
+      "displayName": "Pro",
+      "features": {
+        "custom_short_codes": true,
+        "custom_domains": false,
+        "api_access": true,
+        "advanced_analytics": false,
+        "priority_support": false
+      },
+      "limits": {
+        "short_urls_total": 100,
+        "link_clicks_per_month": 50000,
+        "api_calls_per_day": 1000,
+        "custom_domains_total": 0
+      }
+    },
+    "business": {
+      "displayName": "Business",
+      "features": {
+        "custom_short_codes": true,
+        "custom_domains": true,
+        "api_access": true,
+        "advanced_analytics": true,
+        "priority_support": false
+      },
+      "limits": {
+        "short_urls_total": 1000,
+        "link_clicks_per_month": 500000,
+        "api_calls_per_day": 10000,
+        "custom_domains_total": 1
+      }
+    },
+    "enterprise": {
+      "displayName": "Enterprise",
+      "features": {
+        "custom_short_codes": true,
+        "custom_domains": true,
+        "api_access": true,
+        "advanced_analytics": true,
+        "priority_support": true
+      },
+      "limits": {
+        "short_urls_total": -1,
+        "link_clicks_per_month": -1,
+        "api_calls_per_day": -1,
+        "custom_domains_total": -1
+      }
+    }
+  }
+}

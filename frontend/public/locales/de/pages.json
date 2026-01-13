@@ -1,0 +1,467 @@
+{
+  "welcome": {
+    "title": "Willkommen - SaaS Starter Template",
+    "hero": {
+      "heading": "Erstellen Sie Ihre SaaS-Anwendung schneller",
+      "subheading": "Eine produktionsreife Vorlage mit Authentifizierung, Benutzerverwaltung, Admin-Panel und Tier-System. Beginnen Sie sofort mit der Entwicklung Ihrer einzigartigen Funktionen.",
+      "getStarted": "Kostenlos starten",
+      "signIn": "Anmelden"
+    },
+    "features": {
+      "authentication": {
+        "title": "Vollständige Authentifizierung",
+        "description": "E-Mail-basierte Registrierung, JWT-Tokens, Passwort-Zurücksetzung und E-Mail-Bestätigung integriert und einsatzbereit."
+      },
+      "userManagement": {
+        "title": "Benutzerverwaltung",
+        "description": "Profilverwaltung, Kontoeinstellungen, Datenexport und Kontolöschung mit vollständiger DSGVO-Konformität."
+      },
+      "adminPanel": {
+        "title": "Admin-Panel",
+        "description": "Verwalten Sie Benutzer, Rollen und Systemeinstellungen über eine umfassende Admin-Oberfläche mit rollenbasierter Zugriffskontrolle."
+      }
+    },
+    "benefits": {
+      "heading": "Warum diese Vorlage wählen?",
+      "productionReady": {
+        "title": "Produktionsbereit",
+        "description": "Erstellt mit TypeScript, React und Express. Enthält Docker-Konfiguration für einfache Bereitstellung."
+      },
+      "tierSystem": {
+        "title": "Tier-System",
+        "description": "Integrierte Abonnement-Tiers mit Nutzungsverfolgung und Limit-Durchsetzung. Perfekt für SaaS-Preismodelle."
+      },
+      "notifications": {
+        "title": "Benachrichtigungssystem",
+        "description": "Banner- und Toast-Benachrichtigungen mit Echtzeit-Updates über Server-Sent Events."
+      },
+      "internationalization": {
+        "title": "Internationalisierung",
+        "description": "Mehrsprachige Unterstützung mit i18next. Englische und deutsche Übersetzungen enthalten."
+      },
+      "taskScheduler": {
+        "title": "Aufgabenplaner",
+        "description": "Cron-basiertes Hintergrund-Aufgabenausführungs-Framework für periodische Jobs und Wartungsaufgaben."
+      },
+      "securePrivate": {
+        "title": "Sicher & Privat",
+        "description": "Branchenübliche Sicherheit mit bcrypt-Passwort-Hashing, JWT-Authentifizierung und Rate-Limiting."
+      }
+    },
+    "cta": {
+      "heading": "Bereit zum Entwickeln?",
+      "subheading": "Starten Sie mit einer soliden Grundlage für Ihre SaaS-Anwendung",
+      "button": "Kostenloses Konto erstellen"
+    }
+  },
+  "login": {
+    "title": "Anmelden - SaaS Starter Template",
+    "heading": "Bei Ihrem Konto anmelden",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "submit": "Anmelden",
+    "submitting": "Anmeldung läuft...",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Noch kein Konto?",
+    "signUpLink": "Registrieren",
+    "errors": {
+      "emailRequired": "E-Mail-Adresse ist erforderlich",
+      "passwordRequired": "Passwort ist erforderlich",
+      "loginFailed": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten."
+    }
+  },
+  "signup": {
+    "title": "Registrieren - SaaS Starter Template",
+    "heading": "Konto erstellen",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "submit": "Registrieren",
+    "submitting": "Konto wird erstellt...",
+    "passwordHint": "Muss mindestens 8 Zeichen lang sein",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "signInLink": "Anmelden",
+    "errors": {
+      "emailRequired": "E-Mail-Adresse ist erforderlich",
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      "passwordRequired": "Passwort ist erforderlich",
+      "passwordTooShort": "Passwort muss mindestens 8 Zeichen lang sein",
+      "confirmPasswordRequired": "Passwortbestätigung ist erforderlich",
+      "passwordMismatch": "Passwörter stimmen nicht überein",
+      "accountExists": "Ein Konto mit dieser E-Mail-Adresse existiert bereits",
+      "invalidFormat": "Ungültiges E-Mail- oder Passwortformat",
+      "registrationFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    },
+    "success": {
+      "heading": "Überprüfen Sie Ihre E-Mails",
+      "message": "Wir haben eine Bestätigungs-E-Mail an <strong>{{email}}</strong> gesendet. Bitte überprüfen Sie Ihren Posteingang und klicken Sie auf den Bestätigungslink, um Ihr Konto zu aktivieren.",
+      "note": "Der Bestätigungslink läuft in 24 Stunden ab. Wenn Sie die E-Mail nicht sehen, überprüfen Sie bitte Ihren Spam-Ordner.",
+      "goToLogin": "Zur Anmeldung"
+    }
+  },
+  "confirmEmail": {
+    "title": "E-Mail bestätigen - SaaS Starter Template",
+    "appName": "SaaS Starter Template",
+    "loading": {
+      "heading": "E-Mail wird bestätigt",
+      "message": "Bitte warten Sie, während wir Ihre E-Mail-Adresse verifizieren..."
+    },
+    "success": {
+      "heading": "E-Mail bestätigt!",
+      "message": "Ihre E-Mail-Adresse wurde erfolgreich verifiziert. Sie können sich jetzt in Ihr Konto einloggen.",
+      "redirecting": "Weiterleitung zur Anmeldeseite in wenigen Sekunden...",
+      "goToLogin": "Zur Anmeldung",
+      "loginMessage": "E-Mail erfolgreich bestätigt. Sie können sich jetzt anmelden."
+    },
+    "error": {
+      "heading": "Bestätigung fehlgeschlagen",
+      "signUpAgain": "Erneut registrieren",
+      "backToLogin": "Zurück zur Anmeldung"
+    },
+    "errors": {
+      "noToken": "Kein Bestätigungstoken angegeben. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Bestätigungslink.",
+      "invalidToken": "Dieser Bestätigungslink ist ungültig oder abgelaufen. Bitte fordern Sie eine neue Bestätigungs-E-Mail an.",
+      "failed": "E-Mail-Bestätigung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    }
+  },
+  "confirmEmail": {
+    "title": "E-Mail bestätigen - SaaS Starter Template",
+    "appName": "SaaS Starter Template",
+    "loading": {
+      "heading": "E-Mail wird bestätigt",
+      "message": "Bitte warten Sie, während wir Ihre E-Mail-Adresse verifizieren..."
+    },
+    "success": {
+      "heading": "E-Mail bestätigt!",
+      "message": "Ihre E-Mail-Adresse wurde erfolgreich verifiziert. Sie können sich jetzt bei Ihrem Konto anmelden.",
+      "redirecting": "Weiterleitung zur Anmeldeseite in wenigen Sekunden...",
+      "goToLogin": "Zur Anmeldung",
+      "loginMessage": "E-Mail erfolgreich bestätigt. Sie können sich jetzt anmelden."
+    },
+    "error": {
+      "heading": "Bestätigung fehlgeschlagen",
+      "signUpAgain": "Erneut registrieren",
+      "backToLogin": "Zurück zur Anmeldung"
+    },
+    "errors": {
+      "noToken": "Kein Bestätigungstoken angegeben. Bitte überprüfen Sie Ihre E-Mails und klicken Sie auf den Bestätigungslink.",
+      "invalidToken": "Dieser Bestätigungslink ist ungültig oder abgelaufen. Bitte fordern Sie eine neue Bestätigungs-E-Mail an.",
+      "failed": "E-Mail-Bestätigung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard - SaaS Starter Template",
+    "heading": "Dashboard",
+    "subheading": "Willkommen zu Ihrem SaaS-Anwendungs-Dashboard",
+    "welcome": "Willkommen zu Ihrem SaaS-Anwendungs-Dashboard.",
+    "gettingStarted": "Erste Schritte",
+    "gettingStartedDesc": "Dies ist eine Platzhalterkarte. Ersetzen Sie sie mit den Hauptfunktionen Ihrer Anwendung.",
+    "yourData": "Ihre Daten",
+    "yourDataDesc": "Fügen Sie hier Komponenten hinzu, um benutzerspezifische Daten und Metriken anzuzeigen.",
+    "quickActions": "Schnellaktionen",
+    "quickActionsDesc": "Fügen Sie Schaltflächen und Formulare für häufige Benutzeraktionen hinzu.",
+    "devNote": {
+      "title": "Entwicklerhinweis",
+      "message": "Dies ist ein Platzhalter-Dashboard. Passen Sie diese Seite an, um die Hauptoberfläche Ihrer Anwendung zu erstellen. Die Vorlage enthält Authentifizierung, Benutzerverwaltung, Admin-Panel und Tier-System, die sofort einsatzbereit sind.",
+      "features": "Enthaltene Funktionen:",
+      "auth": "E-Mail-basierte Authentifizierung mit JWT-Tokens",
+      "userMgmt": "Benutzerprofilverwaltung und Kontoeinstellungen",
+      "admin": "Admin-Panel für Benutzer- und Systemverwaltung",
+      "tiers": "Tier-basiertes Abonnementsystem mit Limits",
+      "notifications": "Banner- und Toast-Benachrichtigungssystem",
+      "i18n": "Internationalisierung (Englisch und Deutsch)",
+      "scheduler": "Hintergrund-Aufgabenplaner-Framework"
+    }
+  },
+  "analytics": {
+    "title": "Analysen - SaaS Starter Template",
+    "subtitle": "Verfolgen Sie die Leistung Ihrer Anwendung und Benutzermetriken.",
+    "stats": {
+      "totalUsers": "Gesamtbenutzer",
+      "totalUsersChange": "12,5% seit letztem Monat",
+      "revenue": "Monatlicher Umsatz",
+      "revenueChange": "8,3% seit letztem Monat",
+      "activeUsers": "Aktive Benutzer",
+      "activeUsersChange": "5,2% seit letzter Woche",
+      "conversion": "Konversionsrate",
+      "conversionChange": "0,5% seit letztem Monat"
+    },
+    "charts": {
+      "revenue": "Umsatz & Ausgaben",
+      "userGrowth": "Benutzerwachstum",
+      "tierDistribution": "Tier-Verteilung",
+      "weeklyActivity": "Wöchentliche Aktivität"
+    },
+    "devNote": {
+      "title": "Entwicklerhinweis",
+      "message": "Diese Analysenseite zeigt Beispieldaten mit Recharts an. Ersetzen Sie die Dummy-Daten durch echte Metriken aus Ihrer API, um die tatsächliche Anwendungsleistung zu verfolgen."
+    }
+  },
+  "profile": {
+    "title": "Profil - SaaS Starter Template",
+    "heading": "Profil",
+    "subheading": "Verwalten Sie Ihre Kontoeinstellungen und Daten",
+    "tabs": {
+      "account": "Konto"
+    },
+    "accountInfo": {
+      "heading": "Kontoinformationen",
+      "email": "E-Mail-Adresse",
+      "accountCreated": "Konto erstellt",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+      "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein"
+    },
+    "accountActions": {
+      "heading": "Kontoaktionen",
+      "changePassword": {
+        "title": "Passwort ändern",
+        "description": "Aktualisieren Sie Ihr Kontopasswort",
+        "button": "Passwort ändern"
+      },
+      "changeEmail": {
+        "title": "E-Mail-Adresse ändern",
+        "description": "Aktualisieren Sie Ihre E-Mail-Adresse",
+        "button": "E-Mail ändern",
+        "cancel": "Abbrechen",
+        "newEmail": "Neue E-Mail-Adresse",
+        "newEmailPlaceholder": "Neue E-Mail-Adresse eingeben",
+        "currentPassword": "Aktuelles Passwort",
+        "currentPasswordPlaceholder": "Geben Sie Ihr aktuelles Passwort ein",
+        "submit": "E-Mail-Änderung anfordern",
+        "submitting": "Wird angefordert...",
+        "note": "Ein Bestätigungslink wird an Ihre neue E-Mail-Adresse gesendet.",
+        "errors": {
+          "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+          "passwordRequired": "Passwort ist erforderlich"
+        }
+      },
+      "downloadData": {
+        "title": "Ihre Daten herunterladen",
+        "description": "Exportieren Sie alle Ihre Daten als JSON-Datei",
+        "button": "Daten herunterladen",
+        "downloading": "Wird exportiert..."
+      },
+      "deleteAccount": {
+        "title": "Konto löschen",
+        "description": "Löschen Sie Ihr Konto und alle Daten dauerhaft",
+        "button": "Konto löschen",
+        "confirm": {
+          "heading": "Konto löschen",
+          "message": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion ist dauerhaft und kann nicht rückgängig gemacht werden.",
+          "warning": "Die folgenden Daten werden dauerhaft gelöscht:",
+          "items": {
+            "account": "Ihre Kontoinformationen",
+            "data": "Alle Ihre Anwendungsdaten"
+          },
+          "confirmButton": "Ja, mein Konto löschen",
+          "confirmingButton": "Wird gelöscht...",
+          "cancel": "Abbrechen"
+        }
+      }
+    },
+    "loadingProfile": "Profil wird geladen...",
+    "errors": {
+      "firstNameTooLong": "Vorname darf höchstens 50 Zeichen lang sein",
+      "lastNameTooLong": "Nachname darf höchstens 50 Zeichen lang sein",
+      "updateFailed": "Fehler beim Aktualisieren des Profils. Bitte versuchen Sie es erneut."
+    },
+    "success": {
+      "profileUpdated": "Profil erfolgreich aktualisiert"
+    }
+  },
+  "analytics": {
+    "title": "Analysen - SaaS Starter Template",
+    "subtitle": "Verfolgen Sie die Leistung Ihrer Anwendung und Benutzermetriken.",
+    "stats": {
+      "totalUsers": "Benutzer gesamt",
+      "totalUsersChange": "12,5% gegenüber dem Vormonat",
+      "revenue": "Monatlicher Umsatz",
+      "revenueChange": "8,3% gegenüber dem Vormonat",
+      "activeUsers": "Aktive Benutzer",
+      "activeUsersChange": "5,2% gegenüber der Vorwoche",
+      "conversion": "Conversion-Rate",
+      "conversionChange": "0,5% gegenüber dem Vormonat"
+    },
+    "charts": {
+      "revenue": "Umsatz & Ausgaben",
+      "userGrowth": "Benutzerwachstum",
+      "tierDistribution": "Tier-Verteilung",
+      "weeklyActivity": "Wöchentliche Aktivität"
+    },
+    "devNote": {
+      "title": "Entwicklerhinweis",
+      "message": "Diese Analyseseite zeigt Beispieldaten mit Recharts an. Ersetzen Sie die Dummy-Daten durch echte Metriken aus Ihrer API, um die tatsächliche Anwendungsleistung zu verfolgen."
+    }
+  },
+  "admin": {
+    "title": "Admin - SaaS Starter Template",
+    "heading": "Benutzerverwaltung",
+    "subheading": "Verwalten Sie Benutzerkonten und Berechtigungen",
+    "search": {
+      "label": "Nach E-Mail-Adresse suchen",
+      "placeholder": "E-Mail-Adresse eingeben..."
+    },
+    "roleFilter": {
+      "label": "Nach Rolle filtern",
+      "allRoles": "Alle Rollen"
+    },
+    "table": {
+      "email": "E-Mail-Adresse",
+      "role": "Rolle",
+      "status": "Status",
+      "created": "Erstellt",
+      "actions": "Aktionen",
+      "edit": "Bearbeiten",
+      "activate": "Aktivieren",
+      "activating": "Wird verarbeitet...",
+      "deactivate": "Deaktivieren",
+      "deactivating": "Wird verarbeitet...",
+      "self": "(Selbst)",
+      "cannotDeactivateSelf": "Eigenes Konto kann nicht deaktiviert werden"
+    },
+    "loading": "Benutzer werden geladen...",
+    "error": "Fehler beim Laden der Benutzer",
+    "noUsers": "Keine Benutzer gefunden",
+    "noResults": "Keine Benutzer entsprechen Ihren Suchkriterien",
+    "resultsSummary": "{{filtered}} von {{total}} Benutzern werden angezeigt",
+    "deactivateConfirm": {
+      "heading": "Benutzerkonto deaktivieren?",
+      "message": "Sind Sie sicher, dass Sie diesen Benutzer deaktivieren möchten? Er kann sich erst wieder anmelden, wenn sein Konto reaktiviert wurde.",
+      "cancel": "Abbrechen",
+      "confirm": "Deaktivieren",
+      "confirming": "Wird deaktiviert..."
+    },
+    "toast": {
+      "roleUpdated": "Rolle erfolgreich aktualisiert",
+      "emailUpdated": "E-Mail erfolgreich aktualisiert",
+      "passwordResetSent": "Passwort-Zurücksetzungs-E-Mail erfolgreich gesendet",
+      "passwordUpdated": "Passwort erfolgreich aktualisiert",
+      "userActivated": "Benutzer erfolgreich aktiviert",
+      "userDeactivated": "Benutzer erfolgreich deaktiviert",
+      "roleUpdateFailed": "Fehler beim Aktualisieren der Rolle",
+      "emailUpdateFailed": "Fehler beim Aktualisieren der E-Mail",
+      "passwordResetFailed": "Fehler beim Zurücksetzen des Passworts",
+      "passwordSetFailed": "Fehler beim Setzen des Passworts",
+      "activateFailed": "Fehler beim Aktivieren des Benutzers",
+      "deactivateFailed": "Fehler beim Deaktivieren des Benutzers"
+    }
+  },
+  "pricing": {
+    "title": "Preise - SaaS Starter Template",
+    "heading": "Einfache, transparente Preise",
+    "subheading": "Wählen Sie den Plan, der zu Ihren Bedürfnissen passt",
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "price": "0€",
+        "period": "/Monat",
+        "description": "Perfekt für den Einstieg",
+        "features": {
+          "users": "Bis zu 5 Teammitglieder",
+          "storage": "10 GB Speicher",
+          "basicFeatures": "Alle Basisfunktionen",
+          "emailSupport": "E-Mail-Support",
+          "communityAccess": "Community-Zugang",
+          "advancedAnalytics": "Erweiterte Analysen",
+          "prioritySupport": "Priority-Support"
+        },
+        "button": "Loslegen"
+      },
+      "professional": {
+        "name": "Professional",
+        "price": "29€",
+        "period": "/Monat",
+        "description": "Für wachsende Unternehmen",
+        "badge": "Am beliebtesten",
+        "features": {
+          "users": "Bis zu 25 Teammitglieder",
+          "storage": "100 GB Speicher",
+          "allBasicFeatures": "Alle Basisfunktionen",
+          "advancedAnalytics": "Erweiterte Analysen & Berichte",
+          "apiAccess": "API-Zugriff",
+          "customBranding": "Individuelles Branding",
+          "prioritySupport": "Priority-E-Mail-Support"
+        },
+        "button": "Kostenlose Testversion starten"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "99€",
+        "period": "/Monat",
+        "description": "Für große Organisationen",
+        "features": {
+          "unlimitedUsers": "Unbegrenzte Teammitglieder",
+          "unlimitedStorage": "Unbegrenzter Speicher",
+          "allProfessionalFeatures": "Alle Professional-Funktionen",
+          "advancedSecurity": "Erweiterte Sicherheit & Compliance",
+          "customIntegrations": "Benutzerdefinierte Integrationen",
+          "dedicatedSupport": "Dedizierter Account Manager",
+          "sla": "99,9% Uptime-SLA"
+        },
+        "button": "Vertrieb kontaktieren"
+      }
+    },
+    "comparison": {
+      "heading": "Funktionsvergleich",
+      "feature": "Funktion",
+      "rows": {
+        "users": "Teammitglieder",
+        "storage": "Speicher",
+        "basicFeatures": "Basisfunktionen",
+        "advancedAnalytics": "Erweiterte Analysen",
+        "apiAccess": "API-Zugriff",
+        "customIntegrations": "Benutzerdefinierte Integrationen",
+        "support": "Support"
+      },
+      "values": {
+        "starter": {
+          "users": "Bis zu 5",
+          "storage": "10 GB",
+          "support": "Community"
+        },
+        "professional": {
+          "users": "Bis zu 25",
+          "storage": "100 GB",
+          "support": "Priority-E-Mail"
+        },
+        "enterprise": {
+          "users": "Unbegrenzt",
+          "storage": "Unbegrenzt",
+          "support": "Dediziert + SLA"
+        }
+      }
+    }
+  },
+  "legal": {
+    "title": "Rechtliche Informationen - SaaS Starter Template",
+    "heading": "Rechtliche Informationen",
+    "companyInfo": {
+      "heading": "Unternehmensinformationen",
+      "serviceName": "Dienstname:",
+      "serviceNameValue": "SaaS Starter Template",
+      "serviceType": "Diensttyp:",
+      "serviceTypeValue": "SaaS-Anwendungsvorlage",
+      "contact": "Kontakt:",
+      "contactValue": "legal@example.com"
+    },
+    "contact": {
+      "heading": "Kontaktieren Sie uns",
+      "content": "Wenn Sie Fragen zu diesen rechtlichen Bedingungen haben, kontaktieren Sie uns bitte unter:",
+      "email": "E-Mail:",
+      "emailValue": "legal@example.com"
+    },
+    "lastUpdated": "Zuletzt aktualisiert: 11. Januar 2026"
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen - SaaS Starter Template",
+    "heading": "Nutzungsbedingungen",
+    "lastUpdated": "Zuletzt aktualisiert: 11. Januar 2026"
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung - SaaS Starter Template",
+    "heading": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert: 11. Januar 2026"
+  }
+}

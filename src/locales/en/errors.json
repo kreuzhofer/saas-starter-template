@@ -1,0 +1,58 @@
+{
+  "auth": {
+    "invalidCredentials": "Invalid email or password",
+    "emailNotConfirmed": "Please confirm your email address",
+    "emailConfirmationRequired": "Email confirmation required",
+    "tokenExpired": "Token has expired",
+    "tokenInvalid": "Invalid token",
+    "invalidOrExpiredToken": "Invalid or expired token",
+    "invalidOrExpiredResetToken": "Invalid or expired reset token",
+    "invalidOrExpiredConfirmationToken": "Invalid or expired confirmation token",
+    "unauthorized": "Unauthorized access",
+    "authenticationRequired": "Authentication required",
+    "currentPasswordIncorrect": "Current password is incorrect",
+    "accountNotFound": "Account not found",
+    "apiKeyRequired": "API key required",
+    "invalidApiKey": "Invalid API key",
+    "passwordResetRequested": "If an account exists with that email, a password reset link has been sent. Please check your email.",
+    "passwordResetSuccess": "Your password has been reset successfully. You can now log in with your new password.",
+    "passwordChangedSuccess": "Your password has been changed successfully.",
+    "emailConfirmedSuccess": "Your email has been confirmed successfully. You can now log in."
+  },
+  "validation": {
+    "required": "{{field}} is required",
+    "invalidEmail": "Invalid email address",
+    "invalidEmailFormat": "Invalid email address format",
+    "emailAlreadyInUse": "Email address already in use",
+    "passwordTooShort": "Password must be at least {{min}} characters",
+    "passwordMismatch": "Password and confirmation do not match",
+    "validationFailed": "Validation failed"
+  },
+  "user": {
+    "notFound": "User not found",
+    "usernameAlreadyExists": "Username already exists",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "cannotDeactivateOwnAccount": "Cannot deactivate your own account",
+    "cannotChangeOwnAdminRole": "Cannot change your own admin role to a non-admin role"
+  },
+  "role": {
+    "invalid": "Invalid role: {{role}}. Must be one of: admin, account_owner, account_user",
+    "invalidInToken": "Invalid role in token",
+    "mustBeOneOf": "Role must be one of: admin, account_owner, account_user"
+  },
+  "general": {
+    "internalServerError": "Internal server error",
+    "unknownError": "Unknown error"
+  },
+  "pluralization": {
+    "errors": "{{count}} error",
+    "errors_other": "{{count}} errors",
+    "warnings": "{{count}} warning",
+    "warnings_other": "{{count}} warnings",
+    "records": "{{count}} record",
+    "records_other": "{{count}} records",
+    "users": "{{count}} user",
+    "users_other": "{{count}} users"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "auth": {
+    "invalidCredentials": "Invalid email or password",
+    "emailNotConfirmed": "Please confirm your email address",
+    "tokenExpired": "Token has expired",
+    "tokenInvalid": "Invalid token",
+    "unauthorized": "Unauthorized access",
+    "authenticationRequired": "Authentication required"
+  },
+  "validation": {
+    "required": "{{field}} is required",
+    "invalidEmail": "Invalid email address",
+    "passwordTooShort": "Password must be at least {{min}} characters"
+  },
+  "api": {
+    "requestFailed": "Request failed",
+    "networkError": "Network error. Please check your connection."
+  }
+}
