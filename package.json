@@ -13,10 +13,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy",
-    "migrate:account-roles": "tsx prisma/migrate-account-roles.ts",
-    "test:account-role-migration": "tsx prisma/test-account-role-migration.ts",
     "test": "jest",
-    "test:locales-build": "node test-locales-build.js",
     "validate:translations": "tsx scripts/validate-translations.ts"
   },
   "keywords": [
