@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { I18nextProvider } from 'react-i18next';
 import { ScheduledTasksTab } from './ScheduledTasksTab';
-import type { TaskStatus, TaskLogsResponse } from '../types';
+import type { TaskStatus, ExecutionHistoryResponse } from '../types';
 import testI18n from '../i18n/testConfig';
 import { api } from '../api/client';
 
@@ -13,7 +13,7 @@ vi.mock('../api/client', () => ({
     getTaskStatuses: vi.fn(),
     setTaskEnabled: vi.fn(),
     triggerTask: vi.fn(),
-    getTaskLogs: vi.fn(),
+    getTaskExecutionHistory: vi.fn(),
     sendToast: vi.fn(),
   },
 }));
@@ -49,22 +49,31 @@ describe('ScheduledTasksTab', () => {
     },
   ];
 
-  const mockLogs: TaskLogsResponse = {
+  const mockExecutionHistory: ExecutionHistoryResponse = {
     taskName: 'example-task',
-    logs: [
+    executions: [
       {
-        timestamp: '2024-01-15T10:30:00Z',
+        id: '1',
+        startedAt: '2024-01-15T10:30:00Z',
+        completedAt: '2024-01-15T10:30:01.5Z',
         result: 'success',
+        errorMessage: null,
         duration: 1500,
-        error: null,
+        capturedLogs: 'Task executed successfully',
       },
       {
-        timestamp: '2024-01-15T09:30:00Z',
+        id: '2',
+        startedAt: '2024-01-15T09:30:00Z',
+        completedAt: '2024-01-15T09:30:02Z',
         result: 'failure',
+        errorMessage: 'Connection timeout',
         duration: 2000,
-        error: 'Connection timeout',
+        capturedLogs: 'Error: Connection timeout',
       },
     ],
+    total: 2,
+    limit: 10,
+    offset: 0,
   };
 
   // Helper to wrap component with i18n provider
@@ -373,9 +382,9 @@ describe('ScheduledTasksTab', () => {
       });
     });
 
-    it('should open logs modal when Logs button is clicked', async () => {
+    it('should open execution history modal when Logs button is clicked', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue(mockLogs);
+      vi.mocked(api.getTaskExecutionHistory).mockResolvedValue(mockExecutionHistory);
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -387,13 +396,13 @@ describe('ScheduledTasksTab', () => {
       await user.click(logsButtons[0]);
 
       await waitFor(() => {
-        expect(screen.getByText('Task Logs: example-task')).toBeInTheDocument();
+        expect(screen.getByText('Execution History: example-task')).toBeInTheDocument();
       });
     });
 
-    it('should call getTaskLogs when modal opens', async () => {
+    it('should call getTaskExecutionHistory when modal opens', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue(mockLogs);
+      vi.mocked(api.getTaskExecutionHistory).mockResolvedValue(mockExecutionHistory);
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -405,13 +414,13 @@ describe('ScheduledTasksTab', () => {
       await user.click(logsButtons[0]);
 
       await waitFor(() => {
-        expect(api.getTaskLogs).toHaveBeenCalledWith('example-task', 10);
+        expect(api.getTaskExecutionHistory).toHaveBeenCalledWith('example-task', 10, 0);
       });
     });
 
     it('should display execution history with timestamps and results', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue(mockLogs);
+      vi.mocked(api.getTaskExecutionHistory).mockResolvedValue(mockExecutionHistory);
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -423,7 +432,6 @@ describe('ScheduledTasksTab', () => {
       await user.click(logsButtons[0]);
 
       await waitFor(() => {
-        expect(screen.getByText('Execution History (Last 10 runs)')).toBeInTheDocument();
         const successBadges = screen.getAllByText('Success');
         const failureBadges = screen.getAllByText('Failure');
         expect(successBadges.length).toBeGreaterThan(0);
@@ -433,7 +441,7 @@ describe('ScheduledTasksTab', () => {
 
     it('should show error messages for failed executions', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue(mockLogs);
+      vi.mocked(api.getTaskExecutionHistory).mockResolvedValue(mockExecutionHistory);
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -449,9 +457,9 @@ describe('ScheduledTasksTab', () => {
       });
     });
 
-    it('should display copy-to-clipboard button for errors', async () => {
+    it('should close modal when close button is clicked', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue(mockLogs);
+      vi.mocked(api.getTaskExecutionHistory).mockResolvedValue(mockExecutionHistory);
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -463,43 +471,24 @@ describe('ScheduledTasksTab', () => {
       await user.click(logsButtons[0]);
 
       await waitFor(() => {
-        const copyButtons = screen.getAllByRole('button', { name: /copy/i });
-        expect(copyButtons.length).toBeGreaterThan(0);
-      });
-    });
-
-    it('should close modal when Close button is clicked', async () => {
-      const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue(mockLogs);
-
-      renderWithI18n(<ScheduledTasksTab />);
-
-      await waitFor(() => {
-        expect(screen.getByText('example-task')).toBeInTheDocument();
+        expect(screen.getByText('Execution History: example-task')).toBeInTheDocument();
       });
 
-      const logsButtons = screen.getAllByRole('button', { name: /^logs$/i });
-      await user.click(logsButtons[0]);
-
-      await waitFor(() => {
-        expect(screen.getByText('Task Logs: example-task')).toBeInTheDocument();
-      });
-
-      const closeButton = screen.getByRole('button', { name: /^close$/i });
+      const closeButton = screen.getByLabelText('Close');
       await user.click(closeButton);
 
       await waitFor(() => {
-        expect(screen.queryByText('Task Logs: example-task')).not.toBeInTheDocument();
+        expect(screen.queryByText('Execution History: example-task')).not.toBeInTheDocument();
       });
     });
 
-    it('should show loading state while fetching logs', async () => {
+    it('should show loading state while fetching execution history', async () => {
       const user = userEvent.setup();
-      let resolveLogs: (value: any) => void;
-      const logsPromise = new Promise((resolve) => {
-        resolveLogs = resolve;
+      let resolveHistory: (value: any) => void;
+      const historyPromise = new Promise((resolve) => {
+        resolveHistory = resolve;
       });
-      vi.mocked(api.getTaskLogs).mockReturnValue(logsPromise as any);
+      vi.mocked(api.getTaskExecutionHistory).mockReturnValue(historyPromise as any);
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -511,15 +500,15 @@ describe('ScheduledTasksTab', () => {
       await user.click(logsButtons[0]);
 
       await waitFor(() => {
-        expect(screen.getByText('Loading logs...')).toBeInTheDocument();
+        expect(screen.getByText('Loading execution history...')).toBeInTheDocument();
       });
 
-      resolveLogs!(mockLogs);
+      resolveHistory!(mockExecutionHistory);
     });
 
-    it('should show error state when logs fetch fails', async () => {
+    it('should show error state when execution history fetch fails', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockRejectedValue(new Error('Failed to load logs'));
+      vi.mocked(api.getTaskExecutionHistory).mockRejectedValue(new Error('Failed to load execution history'));
 
       renderWithI18n(<ScheduledTasksTab />);
 
@@ -531,16 +520,19 @@ describe('ScheduledTasksTab', () => {
       await user.click(logsButtons[0]);
 
       await waitFor(() => {
-        expect(screen.getByText('Error loading logs')).toBeInTheDocument();
-        expect(screen.getByText('Failed to load logs')).toBeInTheDocument();
+        expect(screen.getByText('Error loading execution history')).toBeInTheDocument();
+        expect(screen.getByText('Failed to load execution history')).toBeInTheDocument();
       });
     });
 
-    it('should show empty state when no logs exist', async () => {
+    it('should show empty state when no execution history exists', async () => {
       const user = userEvent.setup();
-      vi.mocked(api.getTaskLogs).mockResolvedValue({
+      vi.mocked(api.getTaskExecutionHistory).mockResolvedValue({
         taskName: 'example-task',
-        logs: [],
+        executions: [],
+        total: 0,
+        limit: 10,
+        offset: 0,
       });
 
       renderWithI18n(<ScheduledTasksTab />);

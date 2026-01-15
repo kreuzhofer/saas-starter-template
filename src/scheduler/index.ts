@@ -25,6 +25,9 @@
 // Export types
 export * from './types';
 
+// Export configuration
+export * from './executionHistoryConfig';
+
 // Export scheduler singleton instance
 import { SchedulerFramework } from './SchedulerFramework';
 import { SchedulerConfig } from './types';

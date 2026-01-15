@@ -15,6 +15,7 @@ import {
   triggerTask,
   setTaskEnabled,
   getTaskLogs,
+  getTaskExecutionHistory,
   getOverrides,
   createOverride,
   deleteOverride,
@@ -77,5 +78,8 @@ router.patch('/tasks/:name/enable', authenticateToken, requireRole('admin'), set
 
 // GET /api/admin/tasks/:name/logs - Get task execution logs
 router.get('/tasks/:name/logs', authenticateToken, requireRole('admin'), getTaskLogs);
+
+// GET /api/admin/tasks/:name/history - Get task execution history
+router.get('/tasks/:name/history', authenticateToken, requireRole('admin'), getTaskExecutionHistory);
 
 export default router;

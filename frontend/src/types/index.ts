@@ -304,6 +304,30 @@ export interface TaskLogsResponse {
 }
 
 /**
+ * Task execution history entry
+ */
+export interface ExecutionHistoryEntry {
+  id: string;
+  startedAt: string;
+  completedAt: string;
+  result: 'success' | 'failure';
+  errorMessage: string | null;
+  duration: number; // Duration in milliseconds
+  capturedLogs: string | null;
+}
+
+/**
+ * Response from GET /api/admin/tasks/:name/history
+ */
+export interface ExecutionHistoryResponse {
+  taskName: string;
+  executions: ExecutionHistoryEntry[];
+  total: number;
+  limit: number;
+  offset: number;
+}
+
+/**
  * Limit override information for admin UI
  */
 export interface LimitOverrideInfo {

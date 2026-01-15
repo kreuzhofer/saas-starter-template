@@ -9,6 +9,8 @@ import { TaskRegistry } from './TaskRegistry';
 import { CronManager } from './CronManager';
 import { TaskExecutor } from './TaskExecutor';
 import { TaskStatusRepository } from './TaskStatusRepository';
+import { ExecutionHistoryRepository } from './ExecutionHistoryRepository';
+import { loadExecutionHistoryConfig, validateExecutionHistoryConfig, ExecutionHistoryConfig } from './executionHistoryConfig';
 import logger from '../utils/logger';
 
 /**
@@ -23,7 +25,9 @@ export class SchedulerFramework {
   private cronManager: CronManager;
   private executor: TaskExecutor;
   private statusRepository: TaskStatusRepository;
+  private historyRepository: ExecutionHistoryRepository;
   private config: SchedulerConfig;
+  private historyConfig: ExecutionHistoryConfig;
   private isRunning: boolean = false;
 
   /**
@@ -37,13 +41,29 @@ export class SchedulerFramework {
       enableStatusPersistence: config?.enableStatusPersistence ?? true,
     };
 
+    // Load and validate execution history configuration
+    this.historyConfig = validateExecutionHistoryConfig(loadExecutionHistoryConfig());
+
     // Initialize components
     this.statusRepository = new TaskStatusRepository();
+    this.historyRepository = new ExecutionHistoryRepository();
     this.registry = new TaskRegistry();
     this.cronManager = new CronManager();
-    this.executor = new TaskExecutor(this.statusRepository);
+    
+    // Initialize TaskExecutor with history repository and configuration
+    this.executor = new TaskExecutor(
+      this.statusRepository,
+      this.historyRepository,
+      {
+        historyEnabled: this.historyConfig.enabled,
+        maxLogSize: this.historyConfig.maxLogSize,
+      }
+    );
 
-    logger.debug('SchedulerFramework initialized', { config: this.config });
+    logger.debug('SchedulerFramework initialized', { 
+      config: this.config,
+      historyConfig: this.historyConfig,
+    });
   }
 
   /**
@@ -115,14 +135,12 @@ export class SchedulerFramework {
         });
         
         // Persist initial status with next run time
+        // Note: We don't set lastRun, lastResult, lastError, lastDuration here
+        // to preserve existing execution history across restarts
         await this.executor.updateStatus(task.name, {
           taskName: task.name,
           enabled: task.enabled,
           nextRun,
-          lastRun: null,
-          lastResult: null,
-          lastError: null,
-          lastDuration: null,
         });
         
         logger.info(`Task scheduled: ${task.name}`, {
@@ -319,6 +337,15 @@ export class SchedulerFramework {
    */
   public hasTask(taskName: string): boolean {
     return this.registry.has(taskName);
+  }
+
+  /**
+   * Gets the execution history configuration
+   * 
+   * @returns Execution history configuration
+   */
+  public getHistoryConfig(): ExecutionHistoryConfig {
+    return this.historyConfig;
   }
 
   /**

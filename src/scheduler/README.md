@@ -10,6 +10,7 @@ A general-purpose task scheduler for executing recurring background jobs in the 
 - [Schedule Formats](#schedule-formats)
 - [Error Handling](#error-handling)
 - [Task Management](#task-management)
+- [Execution History](#execution-history)
 - [Configuration](#configuration)
 - [API Reference](#api-reference)
 - [Best Practices](#best-practices)
@@ -20,10 +21,13 @@ A general-purpose task scheduler for executing recurring background jobs in the 
 - ✅ **Flexible Scheduling**: Support for cron expressions and interval-based schedules
 - ✅ **Error Isolation**: Task failures don't affect other tasks or the main application
 - ✅ **Status Persistence**: Task execution status saved to database for monitoring
+- ✅ **Execution History**: Persistent storage of all task executions with detailed logs
+- ✅ **Log Capture**: Automatic capture of task logs during execution (up to 100KB)
 - ✅ **Manual Triggering**: Execute tasks on-demand for testing and debugging
 - ✅ **Enable/Disable**: Control task execution without removing from registry
 - ✅ **Graceful Shutdown**: Properly stops all tasks when application terminates
 - ✅ **Comprehensive Logging**: Detailed logs for all scheduler operations
+- ✅ **Automatic Cleanup**: Configurable retention and automatic purge of old history
 - ✅ **TypeScript Support**: Full type safety and IntelliSense support
 
 ## Quick Start
@@ -456,6 +460,145 @@ interface TaskStatus {
 }
 ```
 
+## Execution History
+
+The scheduler automatically captures and stores detailed execution history for all task runs. This enables administrators to review past executions, debug issues, and audit task behavior over time.
+
+### Overview
+
+Every time a task executes, the scheduler:
+1. Creates a log capture stream to record all log output
+2. Executes the task and captures timing information
+3. Stores the execution record in the `TaskExecutionHistory` database table
+4. Updates the `ScheduledTaskStatus` table with the latest status (for backward compatibility)
+
+History storage is asynchronous and non-blocking, ensuring task execution performance is not impacted.
+
+### Execution History Record
+
+Each execution record contains:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | UUID | Unique execution identifier |
+| `taskName` | string | Name of the executed task |
+| `startedAt` | DateTime | When execution started |
+| `completedAt` | DateTime | When execution completed |
+| `result` | string | `'success'` or `'failure'` |
+| `errorMessage` | string | Error message if task failed (null otherwise) |
+| `duration` | number | Execution duration in milliseconds |
+| `capturedLogs` | string | Log output captured during execution (max 100KB) |
+
+### Log Capture
+
+During task execution, all log messages (debug, info, warn, error) are captured and stored with the execution record. This allows administrators to see exactly what happened during each run.
+
+**Log Size Limit**: Captured logs are limited to 100KB per execution. If logs exceed this limit, they are truncated with a message: `[LOG TRUNCATED: Maximum size exceeded]`
+
+**Log Format**: Logs are stored as formatted text with timestamps and log levels:
+```
+2024-01-15T10:30:00.000Z [INFO] Starting task execution
+2024-01-15T10:30:01.500Z [DEBUG] Processing 150 records
+2024-01-15T10:30:05.200Z [INFO] Task completed successfully
+```
+
+### Querying Execution History
+
+#### Via API
+
+Use the execution history API endpoint to retrieve past executions:
+
+```bash
+# Get last 10 executions for a task
+GET /api/admin/tasks/my-task/history
+
+# Get 20 executions with pagination
+GET /api/admin/tasks/my-task/history?limit=20&offset=0
+
+# Get next page
+GET /api/admin/tasks/my-task/history?limit=20&offset=20
+```
+
+**Response Format**:
+```json
+{
+  "taskName": "my-task",
+  "executions": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "startedAt": "2024-01-15T10:30:00.000Z",
+      "completedAt": "2024-01-15T10:30:05.200Z",
+      "result": "success",
+      "errorMessage": null,
+      "duration": 5200,
+      "capturedLogs": "2024-01-15T10:30:00.000Z [INFO] Starting task..."
+    }
+  ],
+  "total": 150,
+  "limit": 10,
+  "offset": 0
+}
+```
+
+**Query Parameters**:
+| Parameter | Type | Default | Range | Description |
+|-----------|------|---------|-------|-------------|
+| `limit` | number | 10 | 1-100 | Number of records to return |
+| `offset` | number | 0 | ≥0 | Number of records to skip |
+
+**Error Responses**:
+| Status | Condition | Response |
+|--------|-----------|----------|
+| 400 | Invalid limit | `{ "error": "limit must be between 1 and 100" }` |
+| 400 | Invalid offset | `{ "error": "offset must be non-negative" }` |
+| 401 | Not authenticated | `{ "error": "Authentication required" }` |
+| 500 | Database error | `{ "error": "Failed to retrieve execution history" }` |
+
+#### Via Admin Panel
+
+The admin panel provides a visual interface for viewing execution history:
+
+1. Navigate to the **Scheduled Tasks** tab in the admin panel
+2. Click the **Logs** button for any task
+3. View the paginated list of past executions
+4. Click on any execution to view its detailed logs
+5. Use the **Copy** button to copy logs to clipboard
+
+### Log Retention and Cleanup
+
+Execution history is automatically cleaned up based on configurable retention settings.
+
+#### Retention Rules
+
+1. **Age-based retention**: Records older than the retention period are deleted
+2. **Minimum retention**: At least N most recent records per task are always preserved, regardless of age
+
+#### Purge Task
+
+A built-in scheduled task (`task-history-purge`) runs daily to clean up old execution records:
+
+- **Default Schedule**: 2:00 AM daily
+- **Behavior**: Deletes records older than retention period while preserving minimum records per task
+- **Logging**: Logs the number of records deleted after each purge
+
+#### Configuration
+
+See the [Execution History Configuration](#execution-history-configuration) section for environment variables to customize retention behavior.
+
+### Disabling Execution History
+
+To disable execution history storage entirely:
+
+```bash
+TASK_HISTORY_ENABLED=false
+```
+
+When disabled:
+- No execution records are stored in `TaskExecutionHistory`
+- The `ScheduledTaskStatus` table continues to be updated (backward compatibility)
+- The purge task does not run
+- API endpoint returns empty results
+
 ## Configuration
 
 The scheduler can be configured using environment variables.
@@ -468,6 +611,16 @@ The scheduler can be configured using environment variables.
 | `SCHEDULER_SHUTDOWN_TIMEOUT_MS` | number | `5000` | Graceful shutdown timeout (ms) |
 | `SCHEDULER_ENABLE_STATUS_PERSISTENCE` | boolean | `true` | Enable database persistence |
 
+### Execution History Configuration
+
+| Variable | Type | Default | Description |
+|----------|------|---------|-------------|
+| `TASK_HISTORY_ENABLED` | boolean | `true` | Enable/disable execution history storage |
+| `TASK_HISTORY_RETENTION_DAYS` | number | `30` | Days to retain execution history |
+| `TASK_HISTORY_MIN_RECORDS` | number | `10` | Minimum records to keep per task regardless of age |
+| `TASK_HISTORY_PURGE_SCHEDULE` | string | `'0 2 * * *'` | Cron schedule for purge task (default: 2 AM daily) |
+| `TASK_HISTORY_MAX_LOG_SIZE` | number | `102400` | Maximum log size in bytes (default: 100KB) |
+
 ### Configuration Examples
 
 ```bash
@@ -479,6 +632,32 @@ SCHEDULER_SHUTDOWN_TIMEOUT_MS=10000
 
 # Disable status persistence (not recommended)
 SCHEDULER_ENABLE_STATUS_PERSISTENCE=false
+```
+
+### Execution History Configuration Examples
+
+```bash
+# Disable execution history (not recommended for production)
+TASK_HISTORY_ENABLED=false
+
+# Keep execution history for 90 days instead of 30
+TASK_HISTORY_RETENTION_DAYS=90
+
+# Keep at least 50 records per task regardless of age
+TASK_HISTORY_MIN_RECORDS=50
+
+# Run purge at 4 AM instead of 2 AM
+TASK_HISTORY_PURGE_SCHEDULE="0 4 * * *"
+
+# Increase max log size to 500KB
+TASK_HISTORY_MAX_LOG_SIZE=512000
+
+# Complete execution history configuration example
+TASK_HISTORY_ENABLED=true
+TASK_HISTORY_RETENTION_DAYS=60
+TASK_HISTORY_MIN_RECORDS=20
+TASK_HISTORY_PURGE_SCHEDULE="0 3 * * *"
+TASK_HISTORY_MAX_LOG_SIZE=204800
 ```
 
 ### Timezone Considerations
@@ -562,6 +741,93 @@ Enables or disables a task.
 await scheduler.setTaskEnabled('my-task', false); // Disable
 await scheduler.setTaskEnabled('my-task', true);  // Enable
 ```
+
+### Execution History API
+
+#### `GET /api/admin/tasks/:name/history`
+
+Retrieves paginated execution history for a task.
+
+**Authentication**: Required (admin role)
+
+**Path Parameters**:
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `name` | string | Task name |
+
+**Query Parameters**:
+| Parameter | Type | Default | Range | Description |
+|-----------|------|---------|-------|-------------|
+| `limit` | number | 10 | 1-100 | Number of records to return |
+| `offset` | number | 0 | ≥0 | Number of records to skip |
+
+**Response** (200 OK):
+```typescript
+interface ExecutionHistoryResponse {
+  taskName: string;
+  executions: Array<{
+    id: string;
+    startedAt: string;      // ISO 8601 timestamp
+    completedAt: string;    // ISO 8601 timestamp
+    result: 'success' | 'failure';
+    errorMessage: string | null;
+    duration: number;       // milliseconds
+    capturedLogs: string | null;
+  }>;
+  total: number;            // Total records for this task
+  limit: number;            // Requested limit
+  offset: number;           // Requested offset
+}
+```
+
+**Example Request**:
+```bash
+curl -X GET "http://localhost:3000/api/admin/tasks/my-task/history?limit=5&offset=0" \
+  -H "Authorization: Bearer <token>"
+```
+
+**Example Response**:
+```json
+{
+  "taskName": "my-task",
+  "executions": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "startedAt": "2024-01-15T10:30:00.000Z",
+      "completedAt": "2024-01-15T10:30:05.200Z",
+      "result": "success",
+      "errorMessage": null,
+      "duration": 5200,
+      "capturedLogs": "2024-01-15T10:30:00.000Z [INFO] Starting task execution\n..."
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "startedAt": "2024-01-14T10:30:00.000Z",
+      "completedAt": "2024-01-14T10:30:02.100Z",
+      "result": "failure",
+      "errorMessage": "Connection timeout",
+      "duration": 2100,
+      "capturedLogs": "2024-01-14T10:30:00.000Z [INFO] Starting task execution\n2024-01-14T10:30:02.100Z [ERROR] Connection timeout"
+    }
+  ],
+  "total": 150,
+  "limit": 5,
+  "offset": 0
+}
+```
+
+**Error Responses**:
+| Status | Condition | Response Body |
+|--------|-----------|---------------|
+| 400 | Invalid limit | `{ "error": "limit must be between 1 and 100" }` |
+| 400 | Invalid offset | `{ "error": "offset must be non-negative" }` |
+| 401 | Not authenticated | `{ "error": "Authentication required" }` |
+| 500 | Database error | `{ "error": "Failed to retrieve execution history" }` |
+
+**Notes**:
+- Returns empty `executions` array with `total: 0` for non-existent tasks (200 status)
+- Executions are ordered by `startedAt` descending (most recent first)
+- `capturedLogs` may be `null` if log capture was disabled or failed
 
 ## Best Practices
 

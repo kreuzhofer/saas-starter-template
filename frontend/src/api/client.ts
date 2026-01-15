@@ -24,6 +24,7 @@ import type {
   SetTaskEnabledResponse,
   TriggerTaskResponse,
   TaskLogsResponse,
+  ExecutionHistoryResponse,
   GetOverridesResponse,
   CreateOverrideRequest,
   CreateOverrideResponse,
@@ -356,6 +357,21 @@ export const api = {
       headers: getHeaders(),
     });
     return handleResponse<TaskLogsResponse>(response);
+  },
+
+  async getTaskExecutionHistory(taskName: string, limit?: number, offset?: number): Promise<ExecutionHistoryResponse> {
+    const url = new URL(`${API_BASE_URL}/api/admin/tasks/${encodeURIComponent(taskName)}/history`);
+    if (limit !== undefined) {
+      url.searchParams.set('limit', limit.toString());
+    }
+    if (offset !== undefined) {
+      url.searchParams.set('offset', offset.toString());
+    }
+    
+    const response = await fetch(url.toString(), {
+      headers: getHeaders(),
+    });
+    return handleResponse<ExecutionHistoryResponse>(response);
   },
 
   // Override management endpoints

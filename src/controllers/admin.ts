@@ -21,6 +21,7 @@ import { ACCOUNT_TIERS } from '../types/accountTier';
 import { scheduler } from '../scheduler';
 import { tierService } from '../services/tierService';
 import { getLimitNames } from '../config/tierConfig';
+import { ExecutionHistoryRepository } from '../scheduler/ExecutionHistoryRepository';
 
 // Validation schemas
 const updateUserRoleSchema = z.object({
@@ -767,6 +768,101 @@ export async function getTaskLogs(
   }
 }
 
+
+/**
+ * Get task execution history with pagination
+ * GET /api/admin/tasks/:name/history
+ */
+export async function getTaskExecutionHistory(
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    // Ensure user is authenticated
+    if (!req.account) {
+      res.status(401).json({
+        error: 'Authentication required',
+      });
+      return;
+    }
+
+    const { name } = req.params;
+    const limitParam = req.query.limit as string | undefined;
+    const offsetParam = req.query.offset as string | undefined;
+
+    // Parse and validate limit parameter (1-100, default 10)
+    let limit = 10;
+    if (limitParam) {
+      limit = parseInt(limitParam, 10);
+      if (isNaN(limit) || limit < 1 || limit > 100) {
+        res.status(400).json({
+          error: 'limit must be between 1 and 100',
+        });
+        return;
+      }
+    }
+
+    // Parse and validate offset parameter (non-negative, default 0)
+    let offset = 0;
+    if (offsetParam) {
+      offset = parseInt(offsetParam, 10);
+      if (isNaN(offset) || offset < 0) {
+        res.status(400).json({
+          error: 'offset must be non-negative',
+        });
+        return;
+      }
+    }
+
+    // Create repository instance
+    const historyRepository = new ExecutionHistoryRepository();
+
+    // Query execution history
+    const executions = await historyRepository.findByTaskName({
+      taskName: name,
+      limit,
+      offset,
+    });
+
+    // Get total count
+    const total = await historyRepository.countByTaskName(name);
+
+    logger.info('Admin retrieved task execution history', {
+      adminId: req.account.id,
+      adminUsername: req.account.username,
+      taskName: name,
+      executionCount: executions.length,
+      total,
+      limit,
+      offset,
+    });
+
+    res.status(200).json({
+      taskName: name,
+      executions: executions.map(exec => ({
+        id: exec.id,
+        startedAt: exec.startedAt.toISOString(),
+        completedAt: exec.completedAt.toISOString(),
+        result: exec.result,
+        errorMessage: exec.errorMessage,
+        duration: exec.duration,
+        capturedLogs: exec.capturedLogs,
+      })),
+      total,
+      limit,
+      offset,
+    });
+  } catch (error) {
+    logger.error('Error retrieving task execution history', { 
+      error,
+      taskName: req.params.name,
+    });
+    res.status(500).json({
+      error: 'Failed to retrieve execution history',
+    });
+  }
+}
 
 /**
  * Get all limit overrides for a user

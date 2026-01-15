@@ -11,6 +11,7 @@ import { registerTranslationHelper } from './i18n/handlebarsHelper';
 import { scheduler } from './scheduler';
 import { exampleTask } from './tasks/example';
 import { overrideCleanupTask } from './tasks/overrideCleanup';
+import { taskHistoryPurgeTask } from './tasks/taskHistoryPurge';
 
 // Validate configuration on startup
 validateApiKeyConfig(logger);
@@ -177,6 +178,10 @@ const server = app.listen(config.port, async () => {
     // Register override cleanup task
     scheduler.registerTask(overrideCleanupTask);
     logger.info('Override cleanup task registered with scheduler');
+    
+    // Register task history purge task (daily at 02:00 UTC by default)
+    scheduler.registerTask(taskHistoryPurgeTask);
+    logger.info('Task history purge task registered with scheduler');
     
     await scheduler.start();
     logger.info('Task scheduler started successfully');
