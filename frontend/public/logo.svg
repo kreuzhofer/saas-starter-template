@@ -1,0 +1,9 @@
+<svg width="800px" height="800px" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Modern, minimal SaaS logo with layered squares representing cloud/platform layers -->
+  <rect x="15" y="25" width="50" height="50" rx="8" fill="#3B82F6" opacity="0.8"/>
+  <rect x="25" y="35" width="50" height="50" rx="8" fill="#60A5FA" opacity="0.9"/>
+  <rect x="35" y="15" width="50" height="50" rx="8" fill="#93C5FD"/>
+  
+  <!-- Central dot for emphasis -->
+  <circle cx="60" cy="40" r="6" fill="white"/>
+</svg>
